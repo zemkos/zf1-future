@@ -92,7 +92,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * case, it is resetting the namespace in case we have forwarded to a different
      * action, Flashmessage will be 'clean' (default namespace)
      *
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return $this
      */
     public function postDispatch()
     {
@@ -105,7 +105,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * per action controller messaging between requests
      *
      * @param  string $namespace
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return $this
      */
     public function setNamespace($namespace = 'default')
     {
@@ -126,7 +126,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
     /**
      * resetNamespace() - reset the namespace to the default
      *
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return $this
      */
     public function resetNamespace()
     {
@@ -138,7 +138,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * addMessage() - Add a message to flash message
      *
      * @param  string|string[] $message
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return $this
      */
     public function addMessage($message, $namespace = null)
     {
@@ -270,7 +270,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * @return ArrayObject
      */
     #[\ReturnTypeWillChange]
-    public function getIterator($namespace = null)
+    public function getIterator($namespace = null): \Traversable
     {
         if (!is_string($namespace) || $namespace == '') {
             $namespace = $this->getNamespace();
@@ -288,8 +288,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
-    public function count($namespace = null)
+    public function count($namespace = null): int
     {
         if (!is_string($namespace) || $namespace == '') {
             $namespace = $this->getNamespace();

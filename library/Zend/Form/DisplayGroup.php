@@ -30,6 +30,12 @@
 class Zend_Form_DisplayGroup implements Iterator,Countable
 {
     /**
+     * Element Id
+     * @var string
+     */
+    protected $id;
+
+    /**
      * Group attributes
      * @var array
      */
@@ -97,7 +103,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     protected $_order;
 
     /**
-     * @var Zend_Translate
+     * @var Zend_Translate_Adapter
      */
     protected $_translator;
 
@@ -959,7 +965,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     /**
      * Retrieve translator object
      *
-     * @return Zend_Translate|null
+     * @return Zend_Translate_Adapter|null
      */
     public function getTranslator()
     {
@@ -1071,8 +1077,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function next()
+    public function next(): void
     {
         $this->_sort();
         next($this->_elementOrder);
@@ -1083,8 +1088,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function rewind()
+    public function rewind(): void
     {
         $this->_sort();
         reset($this->_elementOrder);
@@ -1095,8 +1099,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
-    public function valid()
+    public function valid(): bool
     {
         $this->_sort();
         return (current($this->_elementOrder) !== false);
@@ -1107,8 +1110,7 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
-    public function count()
+    public function count(): int
     {
         return count($this->_elements);
     }

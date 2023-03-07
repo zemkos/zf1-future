@@ -49,16 +49,21 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
     protected $_separators = [];
 
     /**
+     * @var Zend_Controller_Request_Abstract
+     */
+    protected $_request = null;
+
+    /**
      * Instantiates route based on passed Zend_Config structure
      *
      * @param  Zend_Config $config Configuration object
-     * @return Zend_Controller_Router_Route_Chain
+     * @return static
      */
     public static function getInstance(Zend_Config $config)
     {
         $defs = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : [];
 
-        return new self($config->route, $defs);
+        return new static($config->route, $defs);
     }
 
     /**

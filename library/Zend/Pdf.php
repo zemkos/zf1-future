@@ -83,7 +83,12 @@ require_once 'Zend/Pdf/Element/String.php';
  */
 class Zend_Pdf
 {
-  /**** Class Constants ****/
+    /**
+     * @var string
+     */
+    protected $_pdfHeaderVersion;
+
+    /**** Class Constants ****/
 
     /**
      * Version number of generated PDF documents.
@@ -317,7 +322,7 @@ class Zend_Pdf
      * @param integer $revision
      * @param bool    $load
      * @return void
-     *@throws Zend_Pdf_Exception
+     * @throws Zend_Pdf_Exception
      */
     public function __construct($source = null, $revision = null, $load = false)
     {
@@ -413,7 +418,7 @@ class Zend_Pdf
     }
 
     /**
-     * Retrive number of revisions.
+     * Retrieve number of revisions.
      *
      * @return integer
      */
@@ -1386,7 +1391,7 @@ class Zend_Pdf
                     case 'Producer':
                         if (extension_loaded('mbstring') === true) {
                             $detected = mb_detect_encoding($value);
-                            if ($detected !== 'ASCII') {
+                            if ($detected !== 'ASCII' && $detected !== false) {
                                 $value = "\xfe\xff" . mb_convert_encoding($value, 'UTF-16', $detected);
                             }
                         }

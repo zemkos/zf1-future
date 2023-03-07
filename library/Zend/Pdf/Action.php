@@ -41,12 +41,17 @@ require_once 'Zend/Pdf/Target.php';
 abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveIterator, Countable
 {
     /**
+     * Array of child outlines (array of Zend_Pdf_Outline objects)
+     * @var array
+     */
+    public $childOutlines = [];
+
+    /**
      * Action dictionary
      *
      * @var Zend_Pdf_Element_Dictionary|Zend_Pdf_Element_Object|Zend_Pdf_Element_Reference
      */
     protected $_actionDictionary;
-
 
     /**
      * An original list of chained actions
@@ -366,8 +371,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function valid()
+    public function valid(): bool
     {
         return current($this->next) !== false;
     }
@@ -377,7 +381,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @return Zend_Pdf_Action|null
      */
-    public function getChildren()
+    public function getChildren(): ?\RecursiveIterator
     {
         return current($this->next);
     }
@@ -387,7 +391,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @return bool  whether container has any pages
      */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return count($this->next) > 0;
     }
@@ -402,8 +406,7 @@ abstract class Zend_Pdf_Action extends Zend_Pdf_Target implements RecursiveItera
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
-    public function count()
+    public function count(): int
     {
         return count($this->childOutlines);
     }

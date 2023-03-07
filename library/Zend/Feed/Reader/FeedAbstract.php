@@ -89,7 +89,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     /**
      * Constructor
      *
-     * @param DomDocument The DOM object for the feed's XML
+     * @param DomDocument $domDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
     public function __construct(DOMDocument $domDocument, $type = null)
@@ -240,8 +240,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
      * Move the feed pointer forward
      *
      */
-    #[\ReturnTypeWillChange]
-    public function next()
+    public function next(): void
     {
         ++$this->_entriesKey;
     }
@@ -250,8 +249,7 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
      * Reset the pointer in the feed object
      *
      */
-    #[\ReturnTypeWillChange]
-    public function rewind()
+    public function rewind(): void
     {
         $this->_entriesKey = 0;
     }

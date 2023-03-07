@@ -31,6 +31,11 @@ class Zend_Crypt_Rsa_Key implements Countable
     /**
      * @var string
      */
+    protected $_certificateString;
+
+    /**
+     * @var string
+     */
     protected $_pemString = null;
 
     /**
@@ -83,8 +88,7 @@ class Zend_Crypt_Rsa_Key implements Countable
         return $this->toString();
     }
 
-    #[\ReturnTypeWillChange]
-    public function count()
+    public function count(): int
     {
         return $this->_details['bits'];
     }

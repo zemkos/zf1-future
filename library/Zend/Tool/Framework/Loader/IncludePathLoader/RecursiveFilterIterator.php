@@ -28,6 +28,10 @@
  */
 class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator extends RecursiveFilterIterator
 {
+    /**
+     * @var mixed|\ReflectionClass
+     */
+    public $ref;
 
     protected $_denyDirectoryPattern = null;
     protected $_acceptFilePattern    = null;
@@ -51,7 +55,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
      *
      * @return bool
      */
-    public function accept()
+    public function accept(): bool
     {
         $currentNode = $this->current();
         $currentNodeRealPath = $currentNode->getRealPath();
@@ -73,7 +77,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader_RecursiveFilterIterator exten
      *
      * @return object
      */
-    public function getChildren()
+    public function getChildren(): ?\RecursiveFilterIterator
     {
         if (empty($this->ref)) {
             $this->ref = new ReflectionClass($this);

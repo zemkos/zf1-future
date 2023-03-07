@@ -134,8 +134,8 @@ class Zend_Feed_Element implements ArrayAccess
     public function saveXml()
     {
         // Return a complete document including XML prologue.
-        $doc = new DOMDocument($this->_element->ownerDocument->version,
-                               $this->_element->ownerDocument->actualEncoding);
+        $doc = new DOMDocument((string) $this->_element->ownerDocument->version,
+                               (string) $this->_element->ownerDocument->actualEncoding);
         $doc->appendChild($doc->importNode($this->_element, true));
         return $doc->saveXML();
     }
@@ -374,8 +374,7 @@ class Zend_Feed_Element implements ArrayAccess
      * @param  string $offset
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         if (strpos($offset, ':') !== false) {
             [$ns, $attr] = explode(':', $offset, 2);
@@ -392,6 +391,7 @@ class Zend_Feed_Element implements ArrayAccess
      * @param  string $offset
      * @return string
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (strpos($offset, ':') !== false) {

@@ -881,7 +881,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
             } else {
                 require_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception(
-                        "Unable to find '${class}' in registered packages");
+                        "Unable to find '{$class}' in registered packages");
             }
         } else {
             return parent::__call($method, $args);
@@ -1000,7 +1000,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
-     *@see Zend_Gdata_App_Entry::save
+     * @see Zend_Gdata_App_Entry::save
      */
     public function updateUser($username, $userEntry) {
         return $this->updateEntry($userEntry, $this->getBaseUrl() .

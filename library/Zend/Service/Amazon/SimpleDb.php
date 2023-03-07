@@ -58,6 +58,11 @@ require_once 'Zend/Crypt/Hmac.php';
  */
 class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
 {
+    /**
+     * @var \Zend_Uri|mixed
+     */
+    protected $_endpoint;
+
     /* Notes */
     // TODO SSL is required
 
@@ -452,13 +457,13 @@ class Zend_Service_Amazon_SimpleDb extends Zend_Service_Amazon_Abstract
         // UTF-8 encode all parameters and replace '+' characters
         foreach ($params as $name => $value) {
             unset($params[$name]);
-            $params[utf8_encode($name)] = $value;
+            $params[mb_convert_encoding($name, 'UTF-8', 'ISO-8859-1')] = $value;
         }
 
         $params = $this->_addRequiredParameters($params);
 
         try {
-            /* @var $request Zend_Http_Client */
+            /* @var Zend_Http_Client $request */
             $request = self::getHttpClient();
             $request->resetParameters();
 
