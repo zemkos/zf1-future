@@ -1030,7 +1030,15 @@ class Zend_Soap_Client
     public function _doRequest(Zend_Soap_Client_Common $client, $request, $location, $action, $version, $oneWay = false, $uriParserClass = null)
     {
         // Perform request as is
-        return call_user_func([$client,'SoapClient::__doRequest'], $request, $location, $action, $version, $oneWay, $uriParserClass);
+        if ($uriParserClass !== null) {
+            return call_user_func([$client, 'SoapClient::__doRequest'], $request, $location, $action, $version, $oneWay, $uriParserClass);
+        }
+
+        if ((bool)$oneWay === false) {
+            return call_user_func([$client, 'SoapClient::__doRequest'], $request, $location, $action, $version);
+        }
+
+        return call_user_func([$client, 'SoapClient::__doRequest'], $request, $location, $action, $version, $oneWay);
     }
 
     /**
